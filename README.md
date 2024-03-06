@@ -1,4 +1,4 @@
-# MERN Starter
+# MERN-Quick-Notes
 
 Provides a starter for a MERN application with client and server in separate modules.
 

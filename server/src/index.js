@@ -8,8 +8,9 @@ if (process.env.NODE_ENV !== 'production') {
 
 const express = require('express');
 const logger = require('morgan');
-const checkToken = require('./middleware/check-token')
+const checkToken = require('./middleware/check-token');
 const usersApi = require('./routes/api/users');
+const notes = require('./routes/api/notes');
 
 // Connect to the database
 require('./config/database');
@@ -30,6 +31,7 @@ app.get('/api/test', (req, res) => {
 });
 
 app.use('/api/users', usersApi);
+app.use('/api/notes', notes);
 
 // The following "catch all" route (note the *) is necessary
 // to return the index.html on all non-AJAX requests
