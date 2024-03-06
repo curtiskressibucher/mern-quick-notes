@@ -4,6 +4,6 @@ const ensureLoggedIn = require('../../middleware/ensure-logged-in.js');
 
 const router = express.Router();
 
-router.post('/', noteController.create);
+router.post('/', ensureLoggedIn, noteController.create);
 
 module.exports = router;

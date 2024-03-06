@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
-const User = require('./user');
+const Schema = mongoose.Schema;
 
-const noteSchema = new mongoose.Schema(
+const noteSchema = new Schema(
     {
         text: {
             type: String,
@@ -9,8 +9,9 @@ const noteSchema = new mongoose.Schema(
         },
 
         user: {
-            type: mongoose.Schema.Types.ObjectId,
+            type: Schema.Types.ObjectId,
             ref: 'User',
+            required: true,
         },
     },
     {

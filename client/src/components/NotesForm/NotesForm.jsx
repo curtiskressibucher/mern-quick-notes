@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { getUser } from '../../utilities/users-service';
 
 export default function NotesForm({ user, setUser }) {
     const [text, setText] = useState('');
+
+    console.log(user);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
