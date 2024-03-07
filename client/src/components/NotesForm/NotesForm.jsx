@@ -1,21 +1,27 @@
 import { useState } from 'react';
+import { getToken } from '../../utilities/users-service';
 
-export default function NotesForm({ user, setUser }) {
+export default function NotesForm({ user, addNote }) {
     const [text, setText] = useState('');
 
-    console.log(user);
-
     const handleSubmit = async (event) => {
+        const token = getToken();
+        const newNote = { text, user };
+        console.log(newNote);
         event.preventDefault();
+
         const response = await fetch('/api/notes', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
             },
-            body: JSON.stringify({ text, user }),
+            body: JSON.stringify(newNote),
         });
 
         if (response.ok) {
+            const addedNote = await response.json();
+            addNote(addedNote);
             setText('');
         }
     };

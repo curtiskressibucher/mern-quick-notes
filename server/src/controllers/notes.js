@@ -3,17 +3,23 @@ const Note = require('../models/notes');
 async function create(req, res) {
     try {
         const user = req.user;
-        console.log(user);
-
         const { text } = req.body;
-        const newNote = new Note({ text });
 
-        console.log(newNote);
-
+        const newNote = new Note({ text, user: user.sub });
         const savedNote = await newNote.save();
-        res.json(savedNote);
 
-        console.log(savedNote);
+        res.json(savedNote);
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+async function show(req, res) {
+    try {
+        const user = req.user;
+        const notes = await Note.find({ user: user.sub });
+
+        res.json({ notes });
     } catch (error) {
         console.error('Error:', error);
     }
@@ -21,4 +27,5 @@ async function create(req, res) {
 
 module.exports = {
     create,
+    show,
 };

@@ -6,8 +6,12 @@ export function NavBar({ user, setUser }) {
         <nav>
             {user ? (
                 <>
+                    <Link to='/notes'>Notes</Link>
+                    <br />
                     <Link to='/orders'>All Orders</Link>
+                    <br />
                     <Link to='/orders/new'>New Order</Link>
+                    <br />
                     <Link
                         to=''
                         onClick={() => {
