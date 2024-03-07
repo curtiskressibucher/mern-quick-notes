@@ -6,6 +6,7 @@ const noteSchema = new Schema(
         text: {
             type: String,
             required: true,
+            maxlength: 150,
         },
 
         user: {

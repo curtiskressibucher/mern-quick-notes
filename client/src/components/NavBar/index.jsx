@@ -10,8 +10,6 @@ export function NavBar({ user, setUser }) {
                     <br />
                     <Link to='/orders'>All Orders</Link>
                     <br />
-                    <Link to='/orders/new'>New Order</Link>
-                    <br />
                     <Link
                         to=''
                         onClick={() => {

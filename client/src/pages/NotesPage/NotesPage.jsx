@@ -34,7 +34,6 @@ export default function NotesPage({ user, setUser }) {
 
     return (
         <>
-            <h1>Notes Page</h1>
             <h1>My Notes App</h1>
             <NotesForm user={user} addNote={addNote} />
             <NotesList notes={notes} />

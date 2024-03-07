@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { NewOrderPage } from '../NewOrderPage/NewOrderPage';
 import { AuthPage } from '../AuthPage';
 import { OrderHistoryPage } from '../OrderHistoryPage/OrderHistoryPage';
 import NotesPage from '../NotesPage/NotesPage';
 import { getUser } from '../../utilities/users-service';
 import { NavBar } from '../../components/NavBar';
+import './style.css';
 
 function App() {
     const [user, setUser] = useState(() => {
@@ -28,9 +28,8 @@ function App() {
                         />
                         <Route
                             path='/'
-                            element={<Navigate to='/orders' replace />}
+                            element={<Navigate to='/notes' replace />}
                         />
-                        <Route path='/orders/new' element={<NewOrderPage />} />
                         <Route path='/orders' element={<OrderHistoryPage />} />
                         <Route path='*' element={<Navigate to='/' replace />} />
                     </Routes>
