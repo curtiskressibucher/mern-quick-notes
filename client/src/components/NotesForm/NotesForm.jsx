@@ -4,19 +4,11 @@ import './NotesForm.css';
 
 export default function NotesForm({ user, addNote }) {
     const [text, setText] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
 
-    const MAX_CHARACTER_LIMIT = 150;
+    const MAX_CHARACTER_LIMIT = 149;
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
-        if (text.length > MAX_CHARACTER_LIMIT) {
-            setErrorMessage(
-                `Note exceeds the character limit of ${MAX_CHARACTER_LIMIT} characters.`
-            );
-            return;
-        }
 
         const token = getToken();
         const newNote = { text, user };

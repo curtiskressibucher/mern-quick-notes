@@ -1,11 +1,29 @@
 import { useState } from 'react';
+import { getToken } from '../../utilities/users-service';
 import './NotesList.css';
 
-export default function Notes({ notes }) {
+export default function Notes({ notes, setNotes }) {
     const [ascendingOrder, setAscendingOrder] = useState(true);
 
     const toggleOrder = () => {
         setAscendingOrder(!ascendingOrder);
+    };
+
+    const handleDeleteNote = async (noteId) => {
+        const token = getToken();
+        const response = await fetch(`/api/notes/${noteId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify(),
+        });
+        if (response.ok) {
+            setNotes(notes.filter((note) => note._id !== noteId));
+        } else {
+            throw alert('Failed to delete note');
+        }
     };
 
     const sortedNotes = [...notes].sort((a, b) => {
@@ -26,8 +44,8 @@ export default function Notes({ notes }) {
                 <p>No Notes Yet!</p>
             ) : (
                 <ul>
-                    {sortedNotes.map((note, i) => (
-                        <li key={i}>
+                    {sortedNotes.map((note) => (
+                        <li key={note._id}>
                             {note.text && (
                                 <>
                                     {note.text}
@@ -35,6 +53,12 @@ export default function Notes({ notes }) {
                                     <br />
                                     Created at:{' '}
                                     {new Date(note.createdAt).toLocaleString()}
+                                    <button
+                                        onClick={() =>
+                                            handleDeleteNote(note._id)
+                                        }>
+                                        Delete
+                                    </button>
                                 </>
                             )}
                         </li>

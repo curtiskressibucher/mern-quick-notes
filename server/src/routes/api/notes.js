@@ -6,5 +6,6 @@ const router = express.Router();
 
 router.get('/', ensureLoggedIn, noteController.show);
 router.post('/', ensureLoggedIn, noteController.create);
+router.delete('/:id', ensureLoggedIn, noteController.handleDelete);
 
 module.exports = router;
